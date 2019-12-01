@@ -45,7 +45,7 @@ const Nav = () => {
 	return (
 		<StyledNav>
 			<Link href="/" passHref={true}>
-				<StyledLink>Minha conta</StyledLink>
+				<StyledLink>My account</StyledLink>
 			</Link>
 			<Separator />
 			<ButtonClear>

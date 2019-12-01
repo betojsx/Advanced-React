@@ -105,10 +105,37 @@ injectGlobal`
 		}
 	}
 
+	.slick-current.slick-center {
+		transform: scale(1);
+		box-shadow: ${theme.bsActive};
+	}
+	.slick-slide {
+		transform: scale(0.8);
+		will-change: transform;
+		transition: transform 500ms cubic-bezier(0, 0, 0, 1), box-shadow 500ms cubic-bezier(0, 0, 0, 1);
+	}
+
+	.slick-prev,
+	.slick-next {
+		width: 60px;
+		&:before {
+			font-size: 60px;
+		}
+	}
+
+	.slick-next {
+		right: -70px;
+	}
+
+	.slick-prev {
+		left: -70px;
+	}
+
 `
 
 const StyledPage = styled.div`
 	background: white;
+	min-height: 150vh;
 `;
 
 const Container = styled.div`

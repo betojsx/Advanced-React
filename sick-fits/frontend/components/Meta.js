@@ -8,6 +8,8 @@ const Meta = () => {
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<link rel="shortcut icon" href="/static/favicon.png"/>
 			<link rel="stylesheet" type="text/css" href="/static/nprogress.css"/>
+			<link rel="stylesheet" type="text/css" href="/static/vendor/slick/slick.css"/>
+			<link rel="stylesheet" type="text/css" href="/static/vendor/slick/slick-theme.css"/>
 			<title>bShoes</title>
 
 			
