@@ -78,19 +78,35 @@ const StyledShoe = styled.div`
 	}
 `
 
-const SlideSettings = {
-	className: "center",
-	centerMode: true,
-	infinite: true,
-	centerPadding: "120px",
-	slidesToShow: 3,
-	slidesToScroll: 1,
-	speed: 500
-};
+
+
 
 
 export class HeroShoes extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			window: {
+				width: 0,
+				height: 0
+			}
+		}
+
+	}
+	
 	render() {
+
+		const SlideSettings = {
+			className: 'center',
+			centerMode: true,
+			infinite: true,
+			centerPadding: this.state.window.width < 1540 ? '0px' : '120px',
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			speed: 500
+		};
+
 		return (
 			<Slider {...SlideSettings}>
 				<StyledShoe>
@@ -174,6 +190,31 @@ export class HeroShoes extends Component {
 			</Slider>
 		);
 	}
+
+	componentDidMount() {
+		this.setState({
+			window: {
+				width: window.innerWidth,
+				height: window.innerHeight
+			}
+		})
+		window.addEventListener('resize', this.updateDimensions);
+		console.log( this.state );
+	}
+
+	componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
+	}
+	
+	updateDimensions = () => {
+		this.setState({
+			window: {
+				width: window.innerWidth,
+				height: window.innerHeight
+			}
+		})
+	}
+	
 }
 
 const Hero = () => {
