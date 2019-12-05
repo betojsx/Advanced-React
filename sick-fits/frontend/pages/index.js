@@ -1,10 +1,26 @@
 import React from 'react';
-import Link from 'next/link';
 import Hero from '../components/Hero';
 import styled from 'styled-components';
 import remSize from '../lib/remSize';
 import About from '../components/About';
 import Footer from '../components/Footer';
+
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+
+// Good practice: write queries variables in caps
+const ALL_ITEMS_QUERY = gql`
+	query ALL_ITEMS_QUERY {
+		items {
+			id
+			title
+			price
+			description
+			image
+			largeImage
+		}
+	}
+`;
 
 const ParallaxSection = styled.div`
 	height: 140px;
@@ -28,7 +44,17 @@ const ParallaxSection = styled.div`
 const Home = (props) => {
 	return (
 		<div>
-			<Hero />
+			<Query query={ALL_ITEMS_QUERY}>
+				{
+					({ data, error, loading }) => {
+						if (loading) return <p>Loading..</p>
+						if (error) return <p>Error.. {error.message}</p>
+						console.log(`there's ${data.items.length} items`)
+						return <Hero items={data.items} />
+					}
+				}
+				
+			</Query>
 			<ParallaxSection>
 				<h2>ALL YOU NEED IS HERE</h2>
 			</ParallaxSection>
