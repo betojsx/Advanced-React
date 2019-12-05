@@ -3,7 +3,6 @@ import styled from "styled-components";
 import remSize from "../lib/remSize";
 
 import Slider from "react-slick";
-import { Carousel } from "react-responsive-carousel";
 
 const StyledHero = styled.div`
   min-height: 680px;
