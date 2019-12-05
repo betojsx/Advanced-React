@@ -105,14 +105,12 @@ injectGlobal`
 		}
 	}
 
-	.slick-current.slick-center {
-		transform: scale(1);
+	.slick-current.slick-center > div > div {
 		box-shadow: ${theme.bsActive};
 	}
+
 	.slick-slide {
-		transform: scale(0.8);
-		will-change: transform;
-		transition: transform 500ms cubic-bezier(0, 0, 0, 1), box-shadow 500ms cubic-bezier(0, 0, 0, 1);
+		
 	}
 
 	.slick-prev,
@@ -130,6 +128,21 @@ injectGlobal`
 	.slick-prev {
 		left: -70px;
 	}
+
+	.slick-slide.slick-center { 
+		/* Fix when transitioning from last slide to the clone version of the first slide */ 
+		transform: scale(1);
+	}
+
+	.slick-slide {
+		transform: scale(0.8);
+		will-change: transform;
+		transition: transform 500ms cubic-bezier(0, 0, 0, 1), box-shadow 500ms cubic-bezier(0, 0, 0, 1);
+		background: transparent !important;
+	}
+
+
+
 
 `
 
