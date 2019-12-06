@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import Router from 'next/router';
+import NProgress from 'nprogress';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import formatMoney from '../lib/formatMoney';
+
 export const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
     $title: String!
@@ -42,24 +44,30 @@ class CreateItem extends Component {
 
   uploadFile = async event => {
     console.log('uploading file...');
+    NProgress.start();
     const { files } = event.target;
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'bshoes');
+    let res;
+    try {
+      res = await fetch(
+        `https://api.cloudinary.com/v1_1/betocorp/image/upload`,
+        {
+          method: 'POST',
+          body: data
+        }
+      );
+    } catch (err) {
+      NProgress.done();
+    }
 
-    const res = await fetch(
-      `https://api.cloudinary.com/v1_1/betocorp/image/upload`,
-      {
-        method: 'POST',
-        body: data
-      }
-    );
     const file = await res.json();
-    console.log(file);
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url
     });
+    NProgress.done();
   };
 
   render() {
