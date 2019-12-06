@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import remSize from "../lib/remSize";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import remSize from '../lib/remSize';
 
-import Slider from "react-slick";
+import Slider from 'react-slick';
 
 const StyledHero = styled.div`
   min-height: 680px;
-  background-image: url("/static/images/pattern.png");
+  background-image: url('/static/images/pattern.png');
   background-size: cover;
   background-position: center;
   background-color: ${props => props.theme.secondary};
@@ -29,7 +29,7 @@ const StyledShoe = styled.div`
   overflow: hidden;
   margin: 0 auto;
   position: relative;
-	
+
   .img {
     height: 180px;
 
@@ -99,7 +99,7 @@ export class HeroShoes extends Component {
 
   render() {
     const SlideSettings = {
-      className: "center",
+      className: 'center',
       centerMode: true,
       infinite: true,
       centerPadding: 0,
@@ -111,11 +111,12 @@ export class HeroShoes extends Component {
 
     return (
       <Slider {...SlideSettings}>
-        {items.map(({ title, description, price, id }) => {
+        {items.map(({ title, description, price, id, image }) => {
+          image = image || '/static/images/shoe-01.png';
           return (
             <StyledShoe key={id}>
               <div className="img">
-                <img src="/static/images/shoe-01.png" />
+                <img src={image} />
               </div>
               <div className="content">
                 <h2>{title}</h2>
@@ -139,12 +140,12 @@ export class HeroShoes extends Component {
         height: window.innerHeight
       }
     });
-    window.addEventListener("resize", this.updateDimensions);
+    window.addEventListener('resize', this.updateDimensions);
     console.log(this.state);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
+    window.removeEventListener('resize', this.updateDimensions);
   }
 
   updateDimensions = () => {
