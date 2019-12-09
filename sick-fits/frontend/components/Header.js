@@ -5,46 +5,48 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 
 import Nav from './Nav';
-import Container from "./styles/Container";
+import Container from './styles/Container';
 
 Router.onRouteChangeStart = () => {
-	NProgress.start();
-}
+  NProgress.start();
+};
 Router.onRouteChangeComplete = () => {
-	NProgress.done();
-}
+  NProgress.done();
+};
 Router.onRouteChangeError = () => {
-	NProgress.done();
-}
+  NProgress.done();
+};
 
 const StyledHeader = styled.header`
-	
-	background: ${props => props.theme.white };
+  background: ${props => props.theme.white};
 
-	.row {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		height: 70px;
-	}
-`
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+`;
 const Logo = styled.div`
-	max-width: 160px;
+  max-width: 160px;
+  cursor: pointer;
 `;
 
 const Header = () => {
-	return (
-		<StyledHeader>
-			<Container>
-				<div className="row">
-					<Logo>
-						<img src="/static/images/logo.png"/>
-					</Logo>
-					<Nav />
-				</div>
-			</Container>
-		</StyledHeader>
-	);
-}
+  return (
+    <StyledHeader>
+      <Container>
+        <div className="row">
+          <Link href="/">
+            <Logo>
+              <img src="/static/images/logo.png" />
+            </Logo>
+          </Link>
+          <Nav />
+        </div>
+      </Container>
+    </StyledHeader>
+  );
+};
 
 export default Header;
