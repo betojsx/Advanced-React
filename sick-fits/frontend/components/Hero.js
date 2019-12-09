@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import remSize from '../lib/remSize';
-
+import Link from 'next/link';
 import Slider from 'react-slick';
 
 const StyledHero = styled.div`
@@ -125,6 +125,9 @@ export class HeroShoes extends Component {
               <div className="footer">
                 <span className="price">R${price}</span>
                 <button className="button">Add to cart</button>
+                <Link href={{ pathname: '/update', query: { id } }}>
+                  <button className="button">Edit</button>
+                </Link>
               </div>
             </StyledShoe>
           );

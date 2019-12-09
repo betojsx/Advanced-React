@@ -1,15 +1,33 @@
 const Mutations = {
-	async createItem(parent, args, ctx, info) {
-		// TODO: check if user is logged in
+  async createItem(parent, args, ctx, info) {
+    // TODO: check if user is logged in
 
-		const item = await ctx.db.mutation.createItem({
-			data: {
-				...args
-			}
-		}, info);
+    const item = await ctx.db.mutation.createItem(
+      {
+        data: {
+          ...args
+        }
+      },
+      info
+    );
 
-		return item;
-	}
+    return item;
+  },
+
+  async updateItem(parent, args, ctx, info) {
+    const updates = { ...args };
+    delete updates.id;
+
+    return ctx.db.mutation.updateItem(
+      {
+        data: updates,
+        where: {
+          id: args.id
+        }
+      },
+      info
+    );
+  }
 };
 
 module.exports = Mutations;
