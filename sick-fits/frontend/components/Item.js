@@ -23,6 +23,12 @@ const StyledItem = styled.div`
       width: 100%;
     }
   }
+
+  a {
+    display: block;
+    height: 100%;
+  }
+
   .content {
     padding: 20px 30px 0;
     color: ${props => props.theme.dark};
@@ -72,22 +78,26 @@ const Item = ({ title, description, price, id, image }) => {
   image = image || '/static/images/shoe-01.png';
   return (
     <StyledItem key={id}>
-      <div className="img">
-        <img src={image} />
-      </div>
-      <div className="content">
-        <h2>{title}</h2>
-        <p>{description}</p>
-      </div>
-      <div className="footer">
-        <span className="price">R${price}</span>
-        <button className="button">Add to cart</button>
-        <Link href={{ pathname: '/update', query: { id } }}>
-          <DeleteItem className="button" id={id}>
-            Delete
-          </DeleteItem>
-        </Link>
-      </div>
+      <Link href={`/item?id=${id}`}>
+        <a>
+          <div className="img">
+            <img src={image} />
+          </div>
+          <div className="content">
+            <h2>{title}</h2>
+            <p>{description}</p>
+          </div>
+          <div className="footer">
+            <span className="price">R${price}</span>
+            <button className="button">Add to cart</button>
+            <Link href={{ pathname: '/update', query: { id } }}>
+              <DeleteItem className="button" id={id}>
+                Delete
+              </DeleteItem>
+            </Link>
+          </div>
+        </a>
+      </Link>
     </StyledItem>
   );
 };
