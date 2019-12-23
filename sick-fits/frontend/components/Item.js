@@ -8,11 +8,20 @@ const StyledItem = styled.div`
   background: ${props => props.theme.white};
   border-radius: 20px;
   box-shadow: ${props => props.theme.bsDefault};
-  max-width: 370px;
+  max-width: 290px;
   height: 360px;
   overflow: hidden;
   margin: 0 auto;
   position: relative;
+  transform: translateY(0);
+  will-change: transform;
+  transition: all 280ms ease;
+  perspective: 200px;
+
+  &:hover {
+    transform: translateY(-08px);
+    box-shadow: ${props => props.theme.bsActive};
+  }
 
   .img {
     height: 180px;
@@ -27,6 +36,7 @@ const StyledItem = styled.div`
   a {
     display: block;
     height: 100%;
+    text-decoration: none;
   }
 
   .content {
@@ -72,6 +82,7 @@ const StyledItem = styled.div`
   .button {
     font-size: ${() => remSize(14)};
     font-weight: 400;
+    color: ${props => props.theme.dark};
   }
 `;
 const Item = ({ title, description, price, id, image }) => {

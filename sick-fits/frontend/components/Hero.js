@@ -12,13 +12,34 @@ const StyledHero = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  padding: 120px 0;
   > div {
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
+  }
+
+  @media (min-width: 992px) {
+    > div {
+      max-width: 992px;
+    }
   }
 `;
 
+const Row = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  > div {
+    flex: 0 0 calc(33% - 20px);
+    margin: 0 10px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+
+    &:last-child {
+      margin-right: auto;
+    }
+  }
+`;
 export class HeroShoes extends Component {
   constructor(props) {
     super(props);
@@ -44,11 +65,11 @@ export class HeroShoes extends Component {
     const { items } = this.props;
 
     return (
-      <Slider {...SlideSettings}>
+      <Row>
         {items.map(item => {
           return <Item {...item} id={item.id} />;
         })}
-      </Slider>
+      </Row>
     );
   }
 
