@@ -80,10 +80,11 @@ class CreateItem extends Component {
               e.preventDefault();
               const res = await createItemFn();
               console.log(res);
-              Router.push({
-                pathname: '/item',
-                query: { id: res.data.createItem.id }
-              });
+              window.location.reload();
+              // Router.push({
+              //   pathname: '/item',
+              //   query: { id: res.data.createItem.id }
+              // });
             }}
           >
             <Error error={error} />

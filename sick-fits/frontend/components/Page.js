@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Header from "../components/Header";
-import Meta from "../components/Meta";
+import Header from '../components/Header';
+import Meta from '../components/Meta';
 import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 
-import theme from "./styles/theme";
-
+import theme from './styles/theme';
 
 injectGlobal`
 	html {
@@ -144,32 +143,30 @@ injectGlobal`
 
 
 
-`
+`;
 
 const StyledPage = styled.div`
-	background: white;
-	min-height: 150vh;
+  background: white;
+  min-height: 100vh;
 `;
 
 const Container = styled.div`
-	max-width: ${props => props.theme.maxWidth};
-	margin: 0 auto;
+  max-width: ${props => props.theme.maxWidth};
+  margin: 0 auto;
 `;
 
 class Page extends Component {
-	render() {
-		return (
-			<ThemeProvider theme={theme}>
-				<StyledPage>
-					<Meta />
-					<Header />
-					<Container>
-						{this.props.children}
-					</Container>
-				</StyledPage>
-			</ThemeProvider>
-		);
-	}
+  render() {
+    return (
+      <ThemeProvider theme={theme}>
+        <StyledPage>
+          <Meta />
+          <Header />
+          <Container>{this.props.children}</Container>
+        </StyledPage>
+      </ThemeProvider>
+    );
+  }
 }
 
 export default Page;
