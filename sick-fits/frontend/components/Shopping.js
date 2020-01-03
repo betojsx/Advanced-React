@@ -4,10 +4,30 @@ import Footer from './Footer';
 import ItemGrid from './ItemsGrid';
 import remSize from '../lib/remSize';
 
+const Hero = styled.div`
+  height: 420px;
+  background-image: url('/static/images/shopping-hero.png');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -200px;
+  position: relative;
+  margin-bottom: 40px;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+`;
+
 const Section = styled.section`
   min-height: calc(100vh - 70px);
   background: #f9f9f9;
-  padding: 40px 0;
+  padding: 0 0 40px;
   .container {
     margin: 0 auto;
     max-width: ${props => props.theme.containerWidth};
@@ -20,17 +40,23 @@ const Grid = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: ${() => remSize(42)};
+  position: absolute;
+  bottom: 0;
+  left: 14%;
+  mix-blend-mode: soft-light;
+  color: white;
+  font-size: 10rem;
   font-weight: 700;
-  margin-bottom: 40px;
 `;
 
 export class Shopping extends Component {
   render() {
     return (
       <Section>
-        <div className="container">
+        <Hero>
           <Title>Shopping</Title>
+        </Hero>
+        <div className="container">
           <Grid>
             {this.props.items.map(item => {
               return <ItemGrid {...item} />;
