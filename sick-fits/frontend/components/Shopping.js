@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Footer from './Footer';
 import ItemGrid from './ItemsGrid';
 import remSize from '../lib/remSize';
+import Pagination from './Pagination';
 
 const Hero = styled.div`
   height: 420px;
@@ -57,6 +58,7 @@ export class Shopping extends Component {
           <Title>Shopping</Title>
         </Hero>
         <div className="container">
+          <Pagination page={this.props.page} />
           <Grid>
             {this.props.items.map(item => {
               return <ItemGrid {...item} />;
