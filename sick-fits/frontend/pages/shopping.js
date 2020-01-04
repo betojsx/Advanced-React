@@ -11,7 +11,6 @@ export class ShoppingPage extends Component {
       <>
         <Query
           query={ALL_ITEMS_QUERY}
-          fetchPolicy="network-only"
           variables={{
             skip: this.props.query.page * perPage - perPage
           }}
