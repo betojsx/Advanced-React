@@ -59,10 +59,35 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //set the jwt as a cookie on the response
     ctx.response.cookie('token', token, {
-      httpOnly: true,
+      httpOnly: true, //prevent extensions or third part javascript to access the cookie
       maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year cookie
     });
 
+    return user;
+  },
+
+  async signin(parent, { email, password }, ctx, info) {
+    //check if has user with that email
+    const user = await ctx.db.query.user({ where: { email } });
+
+    if (!user) {
+      throw new Error(`No such user found for email ${email}`);
+    }
+    //check if their password is correct
+    const valid = await bcrypt.compare(password, user.password);
+
+    if (!valid) {
+      throw new Error(`Invalid password!`);
+    }
+    //generate the jwt
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    //set the cookie with the token
+    ctx.response.cookie('token', token, {
+      httpOnly: true, //prevent extensions or third part javascript to access the cookie
+      maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year cookie
+    });
+
+    //return the user
     return user;
   }
 };
