@@ -89,6 +89,11 @@ const Mutations = {
 
     //return the user
     return user;
+  },
+
+  async signout(parent, args, ctx, info) {
+    await ctx.response.clearCookie('token');
+    return { message: 'Signed out' };
   }
 };
 
