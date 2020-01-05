@@ -1,3 +1,6 @@
-**Advanced React** is a course by [Wes Bos](https://WesBos.com/).
+This projects uses **React**/**Apollo Client** on the Frontend and **GraphQL Yoga**/**Prisma** on the Backend
 
-I'm creating my own UI and exploring a bit of react and styled components myself but just following along all of the backend stuff.
+If you want to run this project on your own machine:
+
+1. `npm install` on both frontend and backend folders
+2. `npm run dev` on both folders as well
