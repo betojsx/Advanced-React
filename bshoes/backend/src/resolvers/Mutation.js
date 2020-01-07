@@ -113,6 +113,7 @@ const Mutations = {
       data: { resetToken, resetTokenExpiry }
     });
     // email them that reset token
+    return { message: 'Success' };
   },
 
   async resetPassword(
@@ -127,8 +128,11 @@ const Mutations = {
     }
     // check if it's a legit reset token
     // check if it's expired
-    const [user] = ctx.db.query.users({
-      where: { resetToken, resetTokenExpiry_gte: Date.now() - 1000 * 60 * 60 }
+    const [user] = await ctx.db.query.users({
+      where: {
+        resetToken: resetToken,
+        resetTokenExpiry_gte: Date.now() - 1000 * 60 * 60
+      }
     });
 
     if (!user) {
@@ -136,12 +140,12 @@ const Mutations = {
     }
 
     // hash their new password
-    const password = await bcrypt(password, 10);
+    const newPassword = await bcrypt.hash(password, 10);
     // save the new password and reset old resetToken fields
     const updatedUser = await ctx.db.mutation.updateUser({
       where: { email: user.email },
       data: {
-        password,
+        password: newPassword,
         resetToken: null,
         resetTokenExpiry: null
       }
