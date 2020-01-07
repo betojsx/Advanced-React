@@ -115,7 +115,7 @@ const Mutations = {
     // email them that reset token
   },
 
-  async resetPasword(
+  async resetPassword(
     parent,
     { password, confirmPassword, resetToken },
     ctx,
