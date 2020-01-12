@@ -59,11 +59,13 @@ export class Reset extends Component {
               }}
             >
               <fieldset disabled={loading} aria-busy={loading}>
-                <h2>Create your new pasword</h2>
                 <Error error={error} />
                 {!error && !loading && called && (
-                  <p>Success! Check your email for a reset link</p>
+                  <p>
+                    <small>Success! Your password has been changed</small>
+                  </p>
                 )}
+                <h2>Create your new pasword</h2>
                 <label htmlFor="password">
                   Password
                   <input
