@@ -34,8 +34,11 @@ const StyledItem = styled.div`
   }
 
   a {
-    display: block;
+    position: absolute;
+    width: 100%;
     height: 100%;
+    z-index: 0;
+    top: 0;
     text-decoration: none;
   }
 
@@ -65,6 +68,7 @@ const StyledItem = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 1;
   }
 
   .button {
@@ -89,25 +93,24 @@ const Item = ({ title, description, price, id, image }) => {
   image = image || '/static/images/shoe-01.png';
   return (
     <StyledItem key={id}>
+      <div className="img">
+        <img src={image} />
+      </div>
+      <div className="content">
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </div>
+      <div className="footer">
+        <span className="price">R${price}</span>
+        <button className="button">Add to cart</button>
+        <Link href={{ pathname: '/update', query: { id } }}>
+          <DeleteItem className="button" id={id}>
+            Delete
+          </DeleteItem>
+        </Link>
+      </div>
       <Link href={`/item?id=${id}`}>
-        <a>
-          <div className="img">
-            <img src={image} />
-          </div>
-          <div className="content">
-            <h2>{title}</h2>
-            <p>{description}</p>
-          </div>
-          <div className="footer">
-            <span className="price">R${price}</span>
-            <button className="button">Add to cart</button>
-            <Link href={{ pathname: '/update', query: { id } }}>
-              <DeleteItem className="button" id={id}>
-                Delete
-              </DeleteItem>
-            </Link>
-          </div>
-        </a>
+        <a></a>
       </Link>
     </StyledItem>
   );

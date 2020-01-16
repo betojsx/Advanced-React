@@ -29,10 +29,10 @@ class DeleteItem extends Component {
       >
         {(deleteItemMutation, { error }) => (
           <button
-            onClick={async () => {
+            onClick={event => {
+              event.stopPropagation();
               if (confirm('Are you sure you want to delete this item?')) {
-                const res = await deleteItemMutation();
-                console.log(res);
+                deleteItemMutation().catch(alert);
               }
             }}
             className="button"
