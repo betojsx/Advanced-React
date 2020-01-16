@@ -80,12 +80,12 @@ export class HeroShoes extends Component {
         height: window.innerHeight
       }
     });
-    window.addEventListener('resize', this.updateDimensions);
-    console.log(this.state);
+    // window.addEventListener('resize', this.updateDimensions);
+    // console.log(this.state);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions);
+    // window.removeEventListener('resize', this.updateDimensions);
   }
 
   updateDimensions = () => {
