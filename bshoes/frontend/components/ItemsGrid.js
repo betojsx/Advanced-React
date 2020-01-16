@@ -7,7 +7,7 @@ import DeleteItem from './DeleteItem';
 const StyledItem = styled.div`
   height: 360px;
   padding: 30px;
-
+  position: relative;
   &:not(:nth-child(3n)) {
     border-right: 1px solid #efedfd;
   }
@@ -32,7 +32,12 @@ const StyledItem = styled.div`
     display: block;
     height: 100%;
     text-decoration: none;
-    position: relative;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
   }
 
   .content {
@@ -59,6 +64,9 @@ const StyledItem = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 1;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
   .button {
@@ -83,19 +91,18 @@ const ItemGrid = ({ title, description, price, id, image }) => {
   image = image || '/static/images/shoe-01.png';
   return (
     <StyledItem key={id}>
+      <div className="img">
+        <img src={image} />
+      </div>
+      <div className="content">
+        <h2>{title}</h2>
+      </div>
+      <div className="footer">
+        <span className="price">R${price}</span>
+        <button className="button">Add to cart</button>
+      </div>
       <Link href={`/item?id=${id}`}>
-        <a>
-          <div className="img">
-            <img src={image} />
-          </div>
-          <div className="content">
-            <h2>{title}</h2>
-          </div>
-          <div className="footer">
-            <span className="price">R${price}</span>
-            <button className="button">Add to cart</button>
-          </div>
-        </a>
+        <a></a>
       </Link>
     </StyledItem>
   );
